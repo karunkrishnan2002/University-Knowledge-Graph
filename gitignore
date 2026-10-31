@@ -1,0 +1,21 @@
+# OS/editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Protégé temporary/workspace files
+*.backup
+*.lock
+*.log
+
+# Private university submission material
+*Student_Report*.pdf
+*Karun*12553243*.pdf

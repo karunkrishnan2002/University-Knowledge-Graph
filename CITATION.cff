@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "University Knowledge Graph"
+message: "If you use this ontology or its documentation, please cite the repository."
+type: software
+authors:
+  - family-names: Krishnan
+    given-names: Karun
+    affiliation: "TU Wien"
+version: "1.0.0"
+date-released: "2026-10-31"

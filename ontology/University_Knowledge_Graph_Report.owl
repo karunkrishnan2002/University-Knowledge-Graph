@@ -1,0 +1,466 @@
+@prefix : <http://www.semanticweb.org/karun/ontologies/2026/9/untitled-ontology-4/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/karun/ontologies/2026/9/untitled-ontology-4/> .
+
+<https://example.org/university-kg> rdf:type owl:Ontology .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://example.org/university-kg#conductedIn
+:conductedIn rdf:type owl:ObjectProperty ;
+             rdfs:domain [ rdf:type owl:Restriction ;
+                           owl:onProperty :conductedIn ;
+                           owl:someValuesFrom :Course
+                         ] ;
+             rdfs:range [ rdf:type owl:Restriction ;
+                          owl:onProperty :conductedIn ;
+                          owl:someValuesFrom :Classroom
+                        ] ;
+             rdfs:comment "Represents the relationship between an academic course and the classroom in which its teaching activities take place."@en ;
+             rdfs:label "conductedIn"@en .
+
+
+###  https://example.org/university-kg#enrolledIn
+:enrolledIn rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Restriction ;
+                          owl:onProperty :enrolledIn ;
+                          owl:someValuesFrom :Student
+                        ] ;
+            rdfs:range [ rdf:type owl:Restriction ;
+                         owl:onProperty :enrolledIn ;
+                         owl:someValuesFrom :StudyProgramme
+                       ] ;
+            rdfs:comment "Represents the relationship between a student and the university study programme in which the student is formally enrolled."@en ;
+            rdfs:label "enrolledIn"@en .
+
+
+###  https://example.org/university-kg#hasDepartment
+:hasDepartment rdf:type owl:ObjectProperty ;
+               rdfs:domain [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasDepartment ;
+                             owl:someValuesFrom :Faculty
+                           ] ;
+               rdfs:range [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasDepartment ;
+                            owl:someValuesFrom :Department
+                          ] ;
+               rdfs:comment "Represents the relationship between a faculty and the academic departments that belong to it."@en ;
+               rdfs:label "hasDepartment"@en .
+
+
+###  https://example.org/university-kg#hasExamination
+:hasExamination rdf:type owl:ObjectProperty ;
+                rdfs:domain [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasExamination ;
+                              owl:someValuesFrom :Course
+                            ] ;
+                rdfs:range [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasExamination ;
+                             owl:someValuesFrom :Examination
+                           ] ;
+                rdfs:comment "Represents the relationship between an academic course and the examinations associated with that course."@en ;
+                rdfs:label "hasExamination"@en .
+
+
+###  https://example.org/university-kg#hasFaculty
+:hasFaculty rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasFaculty ;
+                          owl:someValuesFrom :University
+                        ] ;
+            rdfs:range [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasFaculty ;
+                         owl:someValuesFrom :Faculty
+                       ] ;
+            rdfs:comment "Represents the relationship between a university and the faculties that belong to it."@en ;
+            rdfs:label "hasFaculty"@en .
+
+
+###  https://example.org/university-kg#hasPrerequisite
+:hasPrerequisite rdf:type owl:ObjectProperty ;
+                 rdfs:domain [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasPrerequisite ;
+                               owl:someValuesFrom :Course
+                             ] ;
+                 rdfs:range [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasPrerequisite ;
+                              owl:someValuesFrom :Course
+                            ] ;
+                 rdfs:comment "Represents the relationship between a course and another course that must be completed as a prerequisite before enrolling in the first course."@en ;
+                 rdfs:label "hasPrerequisite"@en .
+
+
+###  https://example.org/university-kg#hasStudyMaterial
+:hasStudyMaterial rdf:type owl:ObjectProperty ;
+                  rdfs:domain [ rdf:type owl:Restriction ;
+                                owl:onProperty :hasStudyMaterial ;
+                                owl:someValuesFrom :Course
+                              ] ;
+                  rdfs:range [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasStudyMaterial ;
+                               owl:someValuesFrom :StudyMaterial
+                             ] ;
+                  rdfs:comment "Represents the relationship between an academic course and the educational materials associated with that course."@en ;
+                  rdfs:label "hasStudyMaterial"@en .
+
+
+###  https://example.org/university-kg#isSupervisedBy
+:isSupervisedBy rdf:type owl:ObjectProperty ;
+                rdfs:domain [ rdf:type owl:Restriction ;
+                              owl:onProperty :isSupervisedBy ;
+                              owl:someValuesFrom :ResearchProject
+                            ] ;
+                rdfs:range [ rdf:type owl:Restriction ;
+                             owl:onProperty :isSupervisedBy ;
+                             owl:someValuesFrom :Professor
+                           ] ;
+                rdfs:comment "Represents the inverse relationship of supervises, connecting a research project to the professor who supervises it."@en ;
+                rdfs:label "isSupervisedBy"@en .
+
+
+###  https://example.org/university-kg#leadsToDegree
+:leadsToDegree rdf:type owl:ObjectProperty ;
+               rdfs:domain [ rdf:type owl:Restriction ;
+                             owl:onProperty :leadsToDegree ;
+                             owl:someValuesFrom :StudyProgramme
+                           ] ;
+               rdfs:range [ rdf:type owl:Restriction ;
+                            owl:onProperty :leadsToDegree ;
+                            owl:someValuesFrom :Degree
+                          ] ;
+               rdfs:comment "Represents the relationship between a university study programme and the academic degree awarded upon successful completion of that programme."@en ;
+               rdfs:label "leadsToDegree"@en .
+
+
+###  https://example.org/university-kg#offeredIn
+:offeredIn rdf:type owl:ObjectProperty ;
+           rdfs:domain [ rdf:type owl:Restriction ;
+                         owl:onProperty :offeredIn ;
+                         owl:someValuesFrom :Course
+                       ] ;
+           rdfs:range [ rdf:type owl:Restriction ;
+                        owl:onProperty :offeredIn ;
+                        owl:someValuesFrom :Semester
+                      ] ;
+           rdfs:comment "Represents the relationship between an academic course and the semester during which the course is offered."@en ;
+           rdfs:label "offeredIn"@en .
+
+
+###  https://example.org/university-kg#offersCourse
+:offersCourse rdf:type owl:ObjectProperty ;
+              rdfs:domain [ rdf:type owl:Restriction ;
+                            owl:onProperty :offersCourse ;
+                            owl:someValuesFrom :Department
+                          ] ;
+              rdfs:range [ rdf:type owl:Restriction ;
+                           owl:onProperty :offersCourse ;
+                           owl:someValuesFrom :Course
+                         ] ;
+              rdfs:comment "Represents the relationship between an academic department and the courses offered by that department."@en ;
+              rdfs:label "offersCourse"@en .
+
+
+###  https://example.org/university-kg#participatesIn
+:participatesIn rdf:type owl:ObjectProperty ;
+                rdfs:domain [ rdf:type owl:Restriction ;
+                              owl:onProperty :participatesIn ;
+                              owl:someValuesFrom :Student
+                            ] ;
+                rdfs:range [ rdf:type owl:Restriction ;
+                             owl:onProperty :participatesIn ;
+                             owl:someValuesFrom :ResearchProject
+                           ] ;
+                rdfs:comment "Represents the relationship between a student and the university research projects in which the student participates."@en ;
+                rdfs:label "participatesIn"@en .
+
+
+###  https://example.org/university-kg#supervises
+:supervises rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Restriction ;
+                          owl:onProperty :supervises ;
+                          owl:someValuesFrom :Professor
+                        ] ;
+            rdfs:range [ rdf:type owl:Restriction ;
+                         owl:onProperty :supervises ;
+                         owl:someValuesFrom :ResearchProject
+                       ] ;
+            rdfs:comment "Represents the relationship between a professor and the research projects that the professor supervises."@en ;
+            rdfs:label "supervises"@en .
+
+
+###  https://example.org/university-kg#teaches
+:teaches rdf:type owl:ObjectProperty ;
+         rdfs:domain [ rdf:type owl:Restriction ;
+                       owl:onProperty :teaches ;
+                       owl:someValuesFrom :Professor
+                     ] ;
+         rdfs:range [ rdf:type owl:Restriction ;
+                      owl:onProperty :teaches ;
+                      owl:someValuesFrom :Course
+                    ] ;
+         rdfs:comment "Represents the relationship between a professor and the academic courses that the professor teaches."@en ;
+         rdfs:label "teaches"@en .
+
+
+###  https://example.org/university-kg#worksInDepartment
+:worksInDepartment rdf:type owl:ObjectProperty ;
+                   rdfs:domain [ rdf:type owl:Restriction ;
+                                 owl:onProperty :worksInDepartment ;
+                                 owl:someValuesFrom :Professor
+                               ] ;
+                   rdfs:range [ rdf:type owl:Restriction ;
+                                owl:onProperty :worksInDepartment ;
+                                owl:someValuesFrom :Department
+                              ] ;
+                   rdfs:comment "Represents the relationship between a professor and the academic department in which the professor works."@en ;
+                   rdfs:label "worksInDepartment"@en .
+
+
+###  https://example.org/university-kg#writesThesis
+:writesThesis rdf:type owl:ObjectProperty ;
+              rdfs:domain [ rdf:type owl:Restriction ;
+                            owl:onProperty :writesThesis ;
+                            owl:someValuesFrom :Student
+                          ] ;
+              rdfs:range [ rdf:type owl:Restriction ;
+                           owl:onProperty :writesThesis ;
+                           owl:someValuesFrom :Thesis
+                         ] ;
+              rdfs:comment "Represents the relationship between a student and the academic thesis that the student prepares as part of a university study programme."@en ;
+              rdfs:label "writesThesis"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://example.org/university-kg#hasCapacity
+:hasCapacity rdf:type owl:DatatypeProperty ;
+             rdfs:domain [ rdf:type owl:Restriction ;
+                           owl:onProperty owl:topObjectProperty ;
+                           owl:someValuesFrom :Classroom
+                         ] ;
+             rdfs:range xsd:integer ;
+             rdfs:comment "Represents the maximum number of people that a classroom can accommodate."@en ;
+             rdfs:label "hasCapacity"@en .
+
+
+###  https://example.org/university-kg#hasCourseCode
+:hasCourseCode rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain [ rdf:type owl:Restriction ;
+                             owl:onProperty owl:topObjectProperty ;
+                             owl:someValuesFrom :Course
+                           ] ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Represents the unique code assigned to an academic course by the university for identification and administration."@en ;
+               rdfs:label "hasCourseCode"@en .
+
+
+###  https://example.org/university-kg#hasECTS
+:hasECTS rdf:type owl:DatatypeProperty ;
+         rdfs:domain [ rdf:type owl:Restriction ;
+                       owl:onProperty owl:topObjectProperty ;
+                       owl:someValuesFrom :Course
+                     ] ;
+         rdfs:range xsd:decimal ;
+         rdfs:comment "Represents the number of European Credit Transfer and Accumulation System credits assigned to an academic course."@en ;
+         rdfs:label "hasECTS"@en .
+
+
+###  https://example.org/university-kg#hasEmail
+:hasEmail rdf:type owl:DatatypeProperty ;
+          rdfs:domain [ rdf:type owl:Restriction ;
+                        owl:onProperty owl:topObjectProperty ;
+                        owl:someValuesFrom :Professor
+                      ] ;
+          rdfs:range xsd:string ;
+          rdfs:comment "Represents the institutional email address associated with a professor at a university."@en ;
+          rdfs:label "hasEmail"@en .
+
+
+###  https://example.org/university-kg#hasExaminationDate
+:hasExaminationDate rdf:type owl:DatatypeProperty ;
+                    rdfs:domain [ rdf:type owl:Restriction ;
+                                  owl:onProperty owl:topObjectProperty ;
+                                  owl:someValuesFrom :Examination
+                                ] ;
+                    rdfs:range xsd:date ;
+                    rdfs:comment "Represents the scheduled calendar date on which a university examination takes place."@en ;
+                    rdfs:label "hasExaminationDate"@en .
+
+
+###  https://example.org/university-kg#hasName
+:hasName rdf:type owl:DatatypeProperty ;
+         rdfs:domain [ rdf:type owl:Restriction ;
+                       owl:onProperty owl:topObjectProperty ;
+                       owl:someValuesFrom :University
+                     ] ;
+         rdfs:range xsd:string ;
+         rdfs:comment "Represents the name assigned to a university entity, such as a university's official name."@en ;
+         rdfs:label "hasName"@en .
+
+
+###  https://example.org/university-kg#hasProjectTitle
+:hasProjectTitle rdf:type owl:DatatypeProperty ;
+                 rdfs:domain [ rdf:type owl:Restriction ;
+                               owl:onProperty owl:topObjectProperty ;
+                               owl:someValuesFrom :ResearchProject
+                             ] ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "Represents the descriptive title assigned to a research project conducted within a university."@en ;
+                 rdfs:label "hasProjectTitle"@en .
+
+
+###  https://example.org/university-kg#hasRoomNumber
+:hasRoomNumber rdf:type owl:DatatypeProperty ;
+               rdfs:domain [ rdf:type owl:Restriction ;
+                             owl:onProperty owl:topObjectProperty ;
+                             owl:someValuesFrom :Classroom
+                           ] ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Represents the room number assigned to a classroom within a university building."@en ;
+               rdfs:label "hasRoomNumber"@en .
+
+
+###  https://example.org/university-kg#hasSemesterName
+:hasSemesterName rdf:type owl:DatatypeProperty ;
+                 rdfs:domain [ rdf:type owl:Restriction ;
+                               owl:onProperty owl:topObjectProperty ;
+                               owl:someValuesFrom :Semester
+                             ] ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "Represents the name or designation of an academic semester within a university's academic calendar."@en ;
+                 rdfs:label "hasSemesterName"@en .
+
+
+###  https://example.org/university-kg#hasStudentID
+:hasStudentID rdf:type owl:DatatypeProperty ;
+              rdfs:domain [ rdf:type owl:Restriction ;
+                            owl:onProperty owl:topObjectProperty ;
+                            owl:someValuesFrom :Student
+                          ] ;
+              rdfs:range xsd:string ;
+              rdfs:comment "Represents the unique identification number assigned to a student by the university."@en ;
+              rdfs:label "hasStudentID"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://example.org/university-kg#Classroom
+:Classroom rdf:type owl:Class ;
+           rdfs:comment "Represents a physical space within a university that is designated for academic activities such as lectures, seminars, practical sessions, and other teaching and learning activities."@en ;
+           rdfs:label "Classroom"@en .
+
+
+###  https://example.org/university-kg#Course
+:Course rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasCourseCode ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:string
+                        ] ;
+        owl:disjointWith :Examination ;
+        rdfs:comment "Represents an academic subject or unit of study offered by a university as part of an educational programme, typically involving teaching, learning activities, assessments, and defined academic content."@en ;
+        rdfs:label "Course"@en .
+
+
+###  https://example.org/university-kg#Degree
+:Degree rdf:type owl:Class ;
+        rdfs:comment "Represents an academic qualification awarded by a university to a student after successfully completing the requirements of a recognised study programme."@en ;
+        rdfs:label "Degree"@en .
+
+
+###  https://example.org/university-kg#Department
+:Department rdf:type owl:Class ;
+            rdfs:comment "Represents an academic organizational unit within a faculty or university that focuses on a specific discipline and is responsible for teaching, research, and related academic activities."@en ;
+            rdfs:label "Department"@en .
+
+
+###  https://example.org/university-kg#Enrollment
+:Enrollment rdf:type owl:Class ;
+            rdfs:comment "Represents the formal registration of a student in a university study programme, including the academic relationship between the student and the programme."@en ;
+            rdfs:label "Enrollment"@en .
+
+
+###  https://example.org/university-kg#Examination
+:Examination rdf:type owl:Class ;
+             rdfs:comment "Represents an academic assessment conducted by a university to evaluate a student's knowledge, understanding, and competencies in relation to a particular course or subject."@en ;
+             rdfs:label "Examination"@en .
+
+
+###  https://example.org/university-kg#Faculty
+:Faculty rdf:type owl:Class ;
+         rdfs:comment "Represents an academic organizational unit within a university that groups related departments and supports teaching, research and academic administration."@en ;
+         rdfs:label "Faculty"@en .
+
+
+###  https://example.org/university-kg#Professor
+:Professor rdf:type owl:Class ;
+           rdfs:comment "Represents an academic staff member at a university who is involved in teaching, research, academic supervision, and related scholarly activities."@en ;
+           rdfs:label "Professor"@en .
+
+
+###  https://example.org/university-kg#ResearchProject
+:ResearchProject rdf:type owl:Class ;
+                 rdfs:comment "Represents a structured academic research activity conducted within a university, involving research objectives, academic staff, and potentially students."@en ;
+                 rdfs:label "ResearchProject"@en .
+
+
+###  https://example.org/university-kg#Semester
+:Semester rdf:type owl:Class ;
+          rdfs:comment "Represents a defined academic period within a university's academic calendar during which courses are offered and teaching, learning, and assessment activities take place."@en ;
+          rdfs:label "Semester"@en .
+
+
+###  https://example.org/university-kg#Student
+:Student rdf:type owl:Class ;
+         rdfs:comment "Represents an individual enrolled at a university who participates in an academic programme and undertakes educational activities such as attending courses and completing examinations."@en ;
+         rdfs:label "Student"@en .
+
+
+###  https://example.org/university-kg#StudyMaterial
+:StudyMaterial rdf:type owl:Class ;
+               rdfs:comment "Represents an educational resource used by students and academic staff to support teaching, learning, and academic activities within a university."@en ;
+               rdfs:label "StudyMaterial"@en .
+
+
+###  https://example.org/university-kg#StudyProgramme
+:StudyProgramme rdf:type owl:Class ;
+                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                  owl:onProperty :leadsToDegree ;
+                                  owl:someValuesFrom :Degree
+                                ] ;
+                rdfs:comment "Represents an organized academic programme offered by a university that consists of a structured set of courses and academic requirements leading towards a specific academic qualification."@en ;
+                rdfs:label "StudyProgramme"@en .
+
+
+###  https://example.org/university-kg#Thesis
+:Thesis rdf:type owl:Class ;
+        rdfs:comment "Represents an academic research document prepared by a student as part of a university study programme, typically involving independent research, academic writing, and supervision by an academic staff member."@en ;
+        rdfs:label "Thesis"@en .
+
+
+###  https://example.org/university-kg#University
+:University rdf:type owl:Class ;
+            rdfs:comment "Represents a higher education institution that provides academic programmes, organizes faculties and departments, and supports teaching and research activities."@en ;
+            rdfs:label "University"@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
